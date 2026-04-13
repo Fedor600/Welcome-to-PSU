@@ -569,7 +569,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -606,11 +606,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2063763735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b2a5f4e34f3f1408aaf2e9db008ad4, type: 3}
+  m_Script: {fileID: 11500000, guid: d6edce24948086d4daf9b61e5f40980c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  Speed: 5
-  moveVector: {x: 0, y: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerControlling
+  moveSpeed: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

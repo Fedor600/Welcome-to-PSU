@@ -1,45 +1,83 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CharacterSelect : MonoBehaviour
 {
     private int current_char;
 
-    [SerializeField] GameObject[] characters;
+    private GameObject[] characters;
+
+    private int index;
+
+    private void Start()
+    {
+
+        index = PlayerPrefs.GetInt("SelectPlayer");
+
+        characters = new GameObject[transform.childCount];
+
+        for (int  i = 0; i < transform.childCount; i++)
+        {
+            characters[i] = transform.GetChild(i).gameObject;
+
+        }
+
+        foreach (GameObject go in characters)
+        {
+            go.SetActive(false);
+        }
+
+        if (characters[index])
+        {
+            characters[index].SetActive(true);
+        }
+    }
 
     public void ButtonNext()
     {
 
-        if (current_char == characters.Length - 1)
+        characters[index].SetActive(false);
+
+        index++;
+
+        if (index == characters.Length)
         {
-
-            return;
+            index = 0;
         }
-
-        characters[current_char].SetActive(false);
-   
-        current_char++;
-
-        characters[current_char].SetActive(true);
-
-        PlayerPrefs.SetInt("SelectedCharacter", current_char);
-
+        characters[index].SetActive(true);
 
     }
 
     public void ButtonPrev()
     {
 
-        if (current_char == 0)
+        characters[index].SetActive(false);
+
+        index--;
+
+        if (index < 0)
         {
-            return;
+            index = characters.Length - 1;
         }
+        characters[index].SetActive(true);
+        
+    }
 
-        characters[current_char].SetActive(false);
 
-        current_char--;
+    public void ButtonPlay()
+    {
 
-        characters[current_char].SetActive(true);
+        PlayerPrefs.SetInt("SelectPlayer", index);
 
-        PlayerPrefs.SetInt("SelectedCharacter", current_char);
+        SceneManager.LoadScene("Testing");
+
+
+    }
+
+    public void ButtonExit()
+    {
+
+        Application.Quit();
+
+        Debug.Log("Вы вышли из игры");
     }
 }

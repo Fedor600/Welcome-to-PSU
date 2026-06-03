@@ -9,6 +9,9 @@ public class PlayerControlling : MonoBehaviour
     private PlayerControl playerControl;
     private Vector2 movement;
 
+
+   
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,9 +29,16 @@ public class PlayerControlling : MonoBehaviour
         playerControl.Disable();
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         movement = playerControl.Movement.Move.ReadValue<Vector2>();
+
+
     }
 
     private void FixedUpdate()

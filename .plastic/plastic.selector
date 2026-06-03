@@ -1,0 +1,4 @@
+repository "Welcome-to-PSU/Welcome-to-PSU@10171568341040@cloud"
+  path "/"
+    br "/main"
+    co "/main"

@@ -4,6 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+
+    public void Update()
+    {
+
+        
+    }
     
     public void PlayButton()
     {
@@ -13,9 +19,6 @@ public class Menu : MonoBehaviour
 
     public void ExitButon()
     {
-
-        Debug.Log("Выход");
-
 
         Application.Quit();
 

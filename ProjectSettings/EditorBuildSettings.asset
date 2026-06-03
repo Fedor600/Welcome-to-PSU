@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/select.unity
     guid: cd8334790f5ef924ab19525a8717ad37
   - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 1b087b0024e31b1419ce4f0433d38a0b
+  - enabled: 1
     path: Assets/Scenes/game.unity
     guid: 07721117213f1f948a216d18afc70ec0
   - enabled: 1
-    path: Assets/Scenes/menu.unity
-    guid: 1b087b0024e31b1419ce4f0433d38a0b
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 816c547ec9a1eaa4bbbe29c7099fa4df
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     com.unity.localization.settings: {fileID: 11400000, guid: e6b1f6df444c53b438095e67bce74b11, type: 2}

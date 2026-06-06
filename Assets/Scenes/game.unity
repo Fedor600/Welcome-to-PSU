@@ -2371,7 +2371,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &800000002
+--- !u!4 &800000002
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2418,7 +2418,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000002
+--- !u!4 &810000002
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2433,7 +2433,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000003
+--- !u!212 &810000003
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2509,7 +2509,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000012
+--- !u!4 &810000012
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2524,7 +2524,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000013
+--- !u!212 &810000013
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2600,7 +2600,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000022
+--- !u!4 &810000022
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2615,7 +2615,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000023
+--- !u!212 &810000023
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2691,7 +2691,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000032
+--- !u!4 &810000032
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2706,7 +2706,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000033
+--- !u!212 &810000033
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2782,7 +2782,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000042
+--- !u!4 &810000042
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2797,7 +2797,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000043
+--- !u!212 &810000043
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2873,7 +2873,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000052
+--- !u!4 &810000052
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2888,7 +2888,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000053
+--- !u!212 &810000053
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -2964,7 +2964,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000062
+--- !u!4 &810000062
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -2979,7 +2979,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000063
+--- !u!212 &810000063
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3055,7 +3055,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000072
+--- !u!4 &810000072
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3070,7 +3070,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000073
+--- !u!212 &810000073
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3146,7 +3146,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000082
+--- !u!4 &810000082
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3161,7 +3161,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000083
+--- !u!212 &810000083
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3237,7 +3237,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000092
+--- !u!4 &810000092
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3252,7 +3252,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000093
+--- !u!212 &810000093
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3328,7 +3328,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000102
+--- !u!4 &810000102
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3343,7 +3343,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000103
+--- !u!212 &810000103
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3419,7 +3419,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000112
+--- !u!4 &810000112
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3434,7 +3434,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000113
+--- !u!212 &810000113
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3510,7 +3510,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000122
+--- !u!4 &810000122
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3525,7 +3525,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000123
+--- !u!212 &810000123
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3601,7 +3601,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000132
+--- !u!4 &810000132
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3616,7 +3616,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000133
+--- !u!212 &810000133
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0
@@ -3692,7 +3692,7 @@ PrefabInstance:
     m_NavMeshLayer: 0
     m_StaticEditorFlags: 0
     m_IsActive: 1
-  --- !u!4 &810000142
+--- !u!4 &810000142
   Transform:
     m_ObjectHideFlags: 0
     m_CorrespondingSourceObject: {fileID: 0}
@@ -3707,7 +3707,7 @@ PrefabInstance:
     m_Children: []
     m_Father: {fileID: 800000002}
     m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  --- !u!212 &810000143
+--- !u!212 &810000143
   SpriteRenderer:
     serializedVersion: 2
     m_ObjectHideFlags: 0

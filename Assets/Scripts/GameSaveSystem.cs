@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
 
 public class GameSaveSystem : MonoBehaviour
 {
@@ -10,6 +10,9 @@ public class GameSaveSystem : MonoBehaviour
     
     [Header("Настройки")]
     public string gameSceneName = "GameScene";
+    
+    [Header("Опционально: для сохранения прогресса экскурсии")]
+    public ExcursionManager excursionManager;
     
     private static GameSaveSystem instance;
     
@@ -40,8 +43,6 @@ public class GameSaveSystem : MonoBehaviour
         Debug.Log("Сохраняем прогресс и выходим...");
         SaveGame();
         
-        System.Threading.Thread.Sleep(100);
-        
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
@@ -61,12 +62,21 @@ public class GameSaveSystem : MonoBehaviour
             data.playerPosY = playerTransform.position.y;
             data.playerPosZ = playerTransform.position.z;
         }
-       
+        
+        if (excursionManager != null && excursionManager.campusPoints != null)
+        {
+            data.completedPoints = new bool[excursionManager.campusPoints.Length];
+            for (int i = 0; i < excursionManager.campusPoints.Length; i++)
+            {
+                data.completedPoints[i] = excursionManager.campusPoints[i].isCompleted;
+            }
+            Debug.Log($"Сохранено {data.completedPoints.Length} точек экскурсии");
+        }
+        
+        // Сохраняем в JSON
+        string json = JsonUtility.ToJson(data, true);
         string path = GetSavePath();
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(path);
-        bf.Serialize(file, data);
-        file.Close();
+        File.WriteAllText(path, json);
         
         Debug.Log($"Прогресс сохранён! Сцена: {data.sceneName}, Позиция: ({data.playerPosX}, {data.playerPosY}, {data.playerPosZ})");
     }
@@ -83,15 +93,19 @@ public class GameSaveSystem : MonoBehaviour
         
         try
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(path, FileMode.Open);
-            SaveData data = (SaveData)bf.Deserialize(file);
-            file.Close();
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+            
+            if (data == null)
+            {
+                Debug.LogError("Ошибка парсинга JSON");
+                return;
+            }
             
             if (!string.IsNullOrEmpty(data.sceneName))
             {
                 SceneManager.LoadScene(data.sceneName);
-                StartCoroutine(LoadPositionAfterSceneLoad(data));
+                StartCoroutine(LoadPositionAndProgressAfterSceneLoad(data));
             }
             
             Debug.Log("Прогресс загружен!");
@@ -102,7 +116,7 @@ public class GameSaveSystem : MonoBehaviour
         }
     }
     
-    private System.Collections.IEnumerator LoadPositionAfterSceneLoad(SaveData data)
+    private IEnumerator LoadPositionAndProgressAfterSceneLoad(SaveData data)
     {
         yield return null;
         yield return new WaitForEndOfFrame();
@@ -117,6 +131,30 @@ public class GameSaveSystem : MonoBehaviour
         else
         {
             Debug.LogWarning("Игрок не найден в сцене! Убедитесь, что у игрока есть тег 'Player'");
+        }
+        
+        if (excursionManager == null)
+        {
+            excursionManager = FindObjectOfType<ExcursionManager>();
+        }
+        
+        if (excursionManager != null && data.completedPoints != null && data.completedPoints.Length > 0)
+        {
+            if (excursionManager.campusPoints != null && 
+                excursionManager.campusPoints.Length == data.completedPoints.Length)
+            {
+                for (int i = 0; i < data.completedPoints.Length; i++)
+                {
+                    excursionManager.campusPoints[i].isCompleted = data.completedPoints[i];
+                }
+                Debug.Log($"Загружен прогресс экскурсии");
+                
+                // Обновляем UI если есть метод
+                if (excursionManager.UpdateUI != null)
+                {
+                    excursionManager.UpdateUI();
+                }
+            }
         }
     }
     
@@ -137,7 +175,7 @@ public class GameSaveSystem : MonoBehaviour
     
     private string GetSavePath()
     {
-        return Application.persistentDataPath + "/game_save.dat";
+        return Application.persistentDataPath + "/game_save.json";
     }
 }
 
@@ -148,4 +186,5 @@ public class SaveData
     public float playerPosX;
     public float playerPosY;
     public float playerPosZ;
+    public bool[] completedPoints;
 }

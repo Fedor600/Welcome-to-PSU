@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class CuratorTrigger : MonoBehaviour
 {
+    [Header("Информация о корпусе")]
     public string buildingName;
+
     [TextArea(3, 8)]
     public string dialogueText;
 
+    [Header("Ссылки")]
     public DialogueUI dialogueUI;
     public ExcursionManager excursionManager;
 
@@ -13,32 +16,50 @@ public class CuratorTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.E))
+        if (!playerInside)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            dialogueUI.ShowDialogue(buildingName, dialogueText, this);
+            if (dialogueUI != null)
+            {
+                dialogueUI.ShowDialogue(buildingName, dialogueText, this);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = true;
+
+        if (dialogueUI != null)
         {
-            playerInside = true;
             dialogueUI.ShowInteractionHint("Нажмите E, чтобы поговорить с куратором");
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player"))
+            return;
+
+        playerInside = false;
+
+        if (dialogueUI != null)
         {
-            playerInside = false;
             dialogueUI.HideInteractionHint();
+            dialogueUI.CloseDialogue();
         }
     }
 
     public void CompleteDialogue()
     {
-        excursionManager.CompletePoint(buildingName);
+        if (excursionManager != null)
+        {
+            excursionManager.CompletePoint(buildingName);
+        }
     }
 }

@@ -3,14 +3,17 @@ using TMPro;
 
 public class ExcursionManager : MonoBehaviour
 {
+    [Header("Точки кампуса")]
     public CampusPoint[] campusPoints;
 
+    [Header("UI")]
     public TextMeshProUGUI progressText;
     public GameObject finalPanel;
 
     private void Start()
     {
         UpdateProgressUI();
+        CheckFinish();
 
         if (finalPanel != null)
             finalPanel.SetActive(false);
@@ -18,39 +21,62 @@ public class ExcursionManager : MonoBehaviour
 
     public void CompletePoint(string buildingName)
     {
+        if (campusPoints == null)
+            return;
+
         foreach (CampusPoint point in campusPoints)
         {
+            if (point == null)
+                continue;
+
             if (point.buildingName == buildingName && !point.isCompleted)
             {
                 point.isCompleted = true;
+
                 UpdateProgressUI();
                 CheckFinish();
+
                 return;
             }
         }
     }
 
-    private void UpdateProgressUI()
+    public void UpdateProgressUI()
     {
+        if (campusPoints == null)
+            return;
+
         int completed = 0;
 
         foreach (CampusPoint point in campusPoints)
         {
-            if (point.isCompleted)
+            if (point != null && point.isCompleted)
                 completed++;
         }
 
-        progressText.text = $"Посещено: {completed}/{campusPoints.Length}";
+        if (progressText != null)
+        {
+            progressText.text = $"Посещено: {completed}/{campusPoints.Length}";
+        }
     }
 
-    private void CheckFinish()
+    public void CheckFinish()
     {
+        if (campusPoints == null || campusPoints.Length == 0)
+            return;
+
         foreach (CampusPoint point in campusPoints)
         {
-            if (!point.isCompleted)
+            if (point == null || !point.isCompleted)
+            {
+                if (finalPanel != null)
+                    finalPanel.SetActive(false);
+
                 return;
+            }
         }
 
-        finalPanel.SetActive(true);
+        if (finalPanel != null)
+            finalPanel.SetActive(true);
     }
 }

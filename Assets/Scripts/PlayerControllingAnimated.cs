@@ -3,18 +3,21 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerController : MonoBehaviour
+public class PlayerControllingAnimated : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Движение")]
     [SerializeField] private float moveSpeed = 3f;
 
-    [Header("Animation")]
+    [Header("Анимация")]
     [SerializeField] private float framesPerSecond = 8f;
+
+    [Header("Спрайты покоя")]
     [SerializeField] private Sprite idleDown;
     [SerializeField] private Sprite idleUp;
     [SerializeField] private Sprite idleRight;
     [SerializeField] private Sprite idleLeft;
 
+    [Header("Спрайты ходьбы")]
     [SerializeField] private Sprite[] walkDown;
     [SerializeField] private Sprite[] walkUp;
     [SerializeField] private Sprite[] walkRight;
@@ -42,19 +45,27 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         playerControl = new PlayerControl();
+
+        rb.gravityScale = 0f;
+        rb.freezeRotation = true;
 
         SetIdleSprite();
     }
 
     private void OnEnable()
     {
+        if (playerControl == null)
+            playerControl = new PlayerControl();
+
         playerControl.Enable();
     }
 
     private void OnDisable()
     {
-        playerControl.Disable();
+        if (playerControl != null)
+            playerControl.Disable();
     }
 
     private void Update()
@@ -64,7 +75,20 @@ public class PlayerController : MonoBehaviour
         if (movement.sqrMagnitude > 1f)
             movement.Normalize();
 
-        if (movement != Vector2.zero)
+        UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 targetPosition =
+            rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+
+        rb.MovePosition(targetPosition);
+    }
+
+    private void UpdateAnimation()
+    {
+        if (movement.sqrMagnitude > 0.01f)
         {
             UpdateDirection();
             AnimateWalk();
@@ -77,23 +101,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        if (movement == Vector2.zero)
-            return;
-
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-
     private void UpdateDirection()
     {
+        Direction newDirection;
+
         if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y))
         {
-            currentDirection = movement.x > 0 ? Direction.Right : Direction.Left;
+            newDirection =
+                movement.x > 0f
+                ? Direction.Right
+                : Direction.Left;
         }
         else
         {
-            currentDirection = movement.y > 0 ? Direction.Up : Direction.Down;
+            newDirection =
+                movement.y > 0f
+                ? Direction.Up
+                : Direction.Down;
+        }
+
+        if (newDirection != currentDirection)
+        {
+            currentDirection = newDirection;
+            frameIndex = 0;
+            animationTimer = 0f;
         }
     }
 
@@ -102,18 +133,26 @@ public class PlayerController : MonoBehaviour
         Sprite[] animation = GetWalkAnimation();
 
         if (animation == null || animation.Length == 0)
+        {
+            SetIdleSprite();
             return;
+        }
+
+        if (frameIndex >= animation.Length)
+            frameIndex = 0;
 
         animationTimer += Time.deltaTime;
 
         if (animationTimer >= 1f / framesPerSecond)
         {
-            animationTimer -= 1f / framesPerSecond;
+            animationTimer = 0f;
             frameIndex = (frameIndex + 1) % animation.Length;
         }
 
-        spriteRenderer.flipX = false;
-        spriteRenderer.sprite = animation[frameIndex];
+        if (animation[frameIndex] != null)
+        {
+            spriteRenderer.sprite = animation[frameIndex];
+        }
     }
 
     private Sprite[] GetWalkAnimation()
@@ -122,12 +161,16 @@ public class PlayerController : MonoBehaviour
         {
             case Direction.Up:
                 return walkUp;
+
             case Direction.Down:
                 return walkDown;
+
             case Direction.Right:
                 return walkRight;
+
             case Direction.Left:
                 return walkLeft;
+
             default:
                 return walkDown;
         }
@@ -135,34 +178,37 @@ public class PlayerController : MonoBehaviour
 
     private void SetIdleSprite()
     {
-        spriteRenderer.flipX = false;
+        Sprite idleSprite = null;
 
         switch (currentDirection)
         {
             case Direction.Up:
-                if (idleUp != null) spriteRenderer.sprite = idleUp;
+                idleSprite = idleUp;
                 break;
 
             case Direction.Down:
-                if (idleDown != null) spriteRenderer.sprite = idleDown;
+                idleSprite = idleDown;
                 break;
 
             case Direction.Right:
-                if (idleRight != null) spriteRenderer.sprite = idleRight;
+                idleSprite = idleRight;
                 break;
 
             case Direction.Left:
-                if (idleLeft != null) spriteRenderer.sprite = idleLeft;
+                idleSprite = idleLeft;
                 break;
         }
+
+        if (idleSprite != null)
+            spriteRenderer.sprite = idleSprite;
     }
 
     private void OnValidate()
     {
-        if (framesPerSecond <= 0f)
-            framesPerSecond = 1f;
-
         if (moveSpeed < 0f)
             moveSpeed = 0f;
+
+        if (framesPerSecond <= 0f)
+            framesPerSecond = 1f;
     }
 }

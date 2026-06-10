@@ -3,33 +3,62 @@ using TMPro;
 
 public class DialogueUI : MonoBehaviour
 {
-    public GameObject dialoguePanel;
-    public TextMeshProUGUI buildingNameText;
-    public TextMeshProUGUI dialogueText;
-    public GameObject interactionHint;
+    [Header("Окно диалога")]
+    [SerializeField] private GameObject dialoguePanel;
+
+    [Header("Текст диалога")]
+    [SerializeField] private TextMeshProUGUI buildingNameText;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+
+    [Header("Подсказка взаимодействия")]
+    [SerializeField] private GameObject interactionHint;
+    [SerializeField] private TextMeshProUGUI interactionHintText;
 
     private CuratorTrigger currentCurator;
+    private bool isDialogueOpen;
 
     private void Start()
     {
-        dialoguePanel.SetActive(false);
-        interactionHint.SetActive(false);
+        ClosePanelOnly();
+
+        if (interactionHint != null)
+        {
+            interactionHint.SetActive(false);
+        }
     }
 
     public void ShowDialogue(string buildingName, string text, CuratorTrigger curator)
     {
+        if (isDialogueOpen)
+            return;
+
         currentCurator = curator;
+        isDialogueOpen = true;
 
-        buildingNameText.text = buildingName;
-        dialogueText.text = text;
+        if (buildingNameText != null)
+        {
+            buildingNameText.text = buildingName;
+        }
 
-        dialoguePanel.SetActive(true);
-        interactionHint.SetActive(false);
+        if (dialogueText != null)
+        {
+            dialogueText.text = text;
+        }
+
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(true);
+        }
+
+        HideInteractionHint();
     }
 
     public void CloseDialogue()
     {
-        dialoguePanel.SetActive(false);
+        if (!isDialogueOpen)
+            return;
+
+        ClosePanelOnly();
 
         if (currentCurator != null)
         {
@@ -40,12 +69,40 @@ public class DialogueUI : MonoBehaviour
 
     public void ShowInteractionHint(string text)
     {
-        interactionHint.SetActive(true);
-        interactionHint.GetComponent<TextMeshProUGUI>().text = text;
+        if (interactionHint != null)
+        {
+            interactionHint.SetActive(true);
+        }
+
+        if (interactionHintText != null)
+        {
+            interactionHintText.text = text;
+        }
     }
 
     public void HideInteractionHint()
     {
-        interactionHint.SetActive(false);
+        if (interactionHint != null)
+        {
+            interactionHint.SetActive(false);
+        }
+    }
+
+    private void ClosePanelOnly()
+    {
+        isDialogueOpen = false;
+
+        if (dialoguePanel != null)
+        {
+            dialoguePanel.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (isDialogueOpen && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseDialogue();
+        }
     }
 }
